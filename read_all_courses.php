@@ -4,10 +4,11 @@ include("db_config.php");
 // array for JSON response
 $response = array();
 
-
-$query  = "SELECT * FROM course_info";
+$id = $_GET['id'];
+$query  = "SELECT * FROM course_info where dr_id like '$id'";
 $connect = mysqli_connect(hostname, username,password,databaseName);
 $result = mysqli_query($connect, $query);
+
 
 
 // get all courses  from course_info table
@@ -16,11 +17,11 @@ $result = mysqli_query($connect, $query);
 if (mysqli_num_rows($result) > 0) {
   
     $response["courses"] = array();
-    $row = mysqli_fetch_assoc($result);
-    $name = $row["name"];
-    echo $name;
+    //$row = mysqli_fetch_assoc($result);
+   // $name = $row["name"];
+   // echo $name;
 
-    while ($row = mysqli_fetch_array($result)) {
+    while ($row = $row = mysqli_fetch_assoc($result)) {
             // temp user array
             $item = array();
             $item["id"] = $row["id"];
@@ -28,6 +29,7 @@ if (mysqli_num_rows($result) > 0) {
             $item["lab"] = $row["course_lab"];
             $item["state"] = $row["course_state"];
             $item["time"] = $row["course_time"];
+            $item["days"] = $row["course_days"];
         
             // push ordered items into response array 
             array_push($response["courses"], $item);
