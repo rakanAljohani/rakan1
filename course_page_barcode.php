@@ -6,19 +6,16 @@
     
     
     
-    
+    <meta http-equiv="refresh" content="60">
 
         <link rel="stylesheet" href="http://rakan.esy.es/style.css">
-<script type="text/javascript">
-function btats() {
-  setTimeout(function() {window.location.href = "http://rakan.esy.es/course_page_barcode.php";}, 30000);
-}
+
     
-  </script>  
+    
     
   </head>
 
-  <body onload="btats()">
+  <body>
 
     <html lang="en">
 <head>
@@ -31,23 +28,32 @@ function btats() {
 
 
 
+
 <div class="table-title">
 <h3>Course Information</h3>
 </div>
+
+
+<form class="text-center" action="http://rakan.esy.es/read_state_all_course_page.php" method="get">
+<input type="text" name="barcode" autofocus><br><br><br>
+</form>
+
+
+
+
 <table class="table-fill">
 <thead>
 <tr>
-<th class="text-left">Course Name</th>
-<th class="text-left">Lab</th>
-<th class="text-left">State</th>
-<th class="text-left">Day</th>
-<th class="text-left">Time</th>
+<th class="text-center">Course Name</th>
+<th class="text-center">Lab</th>
+<th class="text-center">State</th>
+<th class="text-center">Day</th>
+<th class="text-center">Time</th>
 </tr>
 </thead>
 
 <?php
 
-$barcode=$_GET["barcode"];
 
 
 
@@ -64,8 +70,8 @@ if ($conn->connect_error) {
    $jd = cal_to_jd(CAL_GREGORIAN,date("m"),date("d"),date("Y"));
 $day =jddayofweek($jd,1); 
 
-$query = "SELECT id, course_name, course_time, course_lab, course_state, course_days FROM course_info WHERE dr_id=$barcode";
-//$query = "SELECT id, course_name, course_lab, course_state, course_days, course_time FROM course_info where course_days = '$day' ORDER BY course_time DESC";
+
+$query = "SELECT id, course_name, course_lab, course_state, course_days, course_time FROM course_info where course_days = '$day' ORDER BY course_time DESC";
 $connect = mysqli_connect(hostname, username,password,databaseName);
 $result = mysqli_query($connect, $query);
 
@@ -75,11 +81,11 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
 echo"<tbody class='table-hover'><tr>";
-echo"<td class='text-left'>".$row["course_name"]."</td>";
-echo"<td class='text-left'>".$row["course_lab"]."</td>";
-echo"<td class='text-left'>".$row["course_state"]."</td>";
-echo"<td class='text-left'>".$row["course_days"]."</td>";
-echo"<td class='text-left'>".$row["course_time"]."</td>";
+echo"<td class='text-center'>".$row["course_name"]."</td>";
+echo"<td class='text-center'>".$row["course_lab"]."</td>";
+echo"<td class='text-center'>".$row["course_state"]."</td>";
+echo"<td class='text-center'>".$row["course_days"]."</td>";
+echo"<td class='text-center'>".$row["course_time"]."</td>";
 echo"</tr></tbody>";
    
 

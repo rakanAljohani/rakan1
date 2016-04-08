@@ -28,4 +28,3 @@ $result = mysqli_query($connect, $sql_query);
   echo json_encode($response);
 
  }
-?>

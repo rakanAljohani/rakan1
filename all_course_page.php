@@ -6,19 +6,16 @@
     
     
     
-    
+    <meta http-equiv="refresh" content="60">
 
         <link rel="stylesheet" href="http://rakan.esy.es/style.css">
-<script type="text/javascript">
-function btats() {
-  setTimeout(function() {window.location.href = "http://rakan.esy.es/course_page_barcode.php";}, 30000);
-}
+
     
-  </script>  
+    
     
   </head>
 
-  <body onload="btats()">
+  <body>
 
     <html lang="en">
 <head>
@@ -47,12 +44,6 @@ function btats() {
 
 <?php
 
-$barcode=$_GET["barcode"];
-
-
-
-
-
 
 include("db_config.php");
 
@@ -63,9 +54,8 @@ if ($conn->connect_error) {
 
    $jd = cal_to_jd(CAL_GREGORIAN,date("m"),date("d"),date("Y"));
 $day =jddayofweek($jd,1); 
-
-$query = "SELECT id, course_name, course_time, course_lab, course_state, course_days FROM course_info WHERE dr_id=$barcode";
-//$query = "SELECT id, course_name, course_lab, course_state, course_days, course_time FROM course_info where course_days = '$day' ORDER BY course_time DESC";
+ 
+$query = "SELECT id, course_name, course_lab, course_state, course_days, course_time FROM course_info where course_days = '$day' ORDER BY course_time DESC";
 $connect = mysqli_connect(hostname, username,password,databaseName);
 $result = mysqli_query($connect, $query);
 
@@ -85,7 +75,9 @@ echo"</tr></tbody>";
 
        
     }
-} 
+} else {
+    echo "0 results";
+}
 
 
 
@@ -105,4 +97,4 @@ echo"</tr></tbody>";
     
     
   </body>
-</html>	
+</html>

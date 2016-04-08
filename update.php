@@ -18,7 +18,7 @@ if( isset($_GET['id'])) {
     
 
     
-  $sql_query ="update course_info set course_name='$name', course_time = '$time', course_state = '$state', course_lab='$lab', course_days='$days' where id='$id'";
+  $sql_query ="update course_info set course_name='$name', course_time = '$time', course_state = '$state', course_lab='$lab', course_days='$days'  where id='$id'";
 $result = mysqli_query($connect, $sql_query);
    
   
@@ -36,6 +36,11 @@ $result = mysqli_query($connect, $sql_query);
 
  }
 ?>
+
+
+
+
+
 
 
 
